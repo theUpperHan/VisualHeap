@@ -1,0 +1,28 @@
+[
+    {
+        "address": 0,
+        "size": 16,
+        "left_size": 16,
+        "allocated": "fencepost"
+    },
+    {
+        "address": 16,
+        "size": 3920,
+        "left_size": 16,
+        "allocated": false,
+        "prev": "SENTINEL",
+        "next": "SENTINEL"
+    },
+    {
+        "address": 3936,
+        "size": 144,
+        "left_size": 3920,
+        "allocated": true
+    },
+    {
+        "address": 4080,
+        "size": 16,
+        "left_size": 144,
+        "allocated": "fencepost"
+    }
+]
