@@ -1,0 +1,10 @@
+/home/uprhan/hanglibc/build/dummy.o: /home/uprhan/hanglibc/build/dummy.c \
+ ../include/stdc-predef.h /home/uprhan/hanglibc/build/libc-modules.h \
+ ../include/libc-symbols.h /home/uprhan/hanglibc/build/config.h \
+ ../sysdeps/generic/libc-symver.h ../sysdeps/generic/symbol-hacks.h
+../include/stdc-predef.h:
+/home/uprhan/hanglibc/build/libc-modules.h:
+../include/libc-symbols.h:
+/home/uprhan/hanglibc/build/config.h:
+../sysdeps/generic/libc-symver.h:
+../sysdeps/generic/symbol-hacks.h:
