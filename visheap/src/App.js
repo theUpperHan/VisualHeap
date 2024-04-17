@@ -1,32 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
 
-import HeapFileReceiver from './Components/heapfilereceiver/HeapFileReceiver';
+import axios from 'axios';
+import io from 'socket.io-client'
+import { Route, Routes } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import VisHeapNavBar from './Components/visHeapNavBar/VisHeapNavBar'
+import FolderMonitorReceiver from './Components/folderMonitorReceiver/FolderMonitorReceiver';
+import FileReceiver from './Components/fileUploader/FileUploader';
+import FileSelection from './Components/fileSelection/FileSelection';
+
+const apiCall = () => {
+    axios.get('http://localhost:8080').then((data) => {
+        console.log(data)
+    })
+}
 
 function App() {
-  return (
-    <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
 
-      <HeapFileReceiver />
+    return (
+        <div className="App">
 
-
-    </div>
-  );
+            <VisHeapNavBar />
+            {/* <button onClick={apiCall}>Make API call</button> */}
+            {/* <FileReceiver/> */}
+            <FileSelection/>
+        </div>
+    );
 }
+
 
 export default App;

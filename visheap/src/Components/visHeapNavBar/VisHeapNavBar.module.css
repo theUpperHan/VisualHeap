@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
+.container h1 {
+    font-family: 'Cabin', sans-serif;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.navbar {
+  width: 100%;
+  color: white;
+  padding: 18px 10px;
+  box-sizing: border-box;
+  background: linear-gradient(to right, #00072D, #0E6BA8);
+  font-family: 'Cabin', sans-serif;
+}
+.navbar ul {
+  list-style-type: none;
+  display: flex;
+  margin: 0 auto;
+  max-width: 1600px;
+  align-items: center;
+}
+.title {
+  margin-right: auto;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-size: 25px;
+  font-style: italic;
+}
+.navbar button, .navbar a {
+  margin-left: 40px;
+}
+.navbar a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+.navbar a:hover {
+  text-decoration: underline;
+}
