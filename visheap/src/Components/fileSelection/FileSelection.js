@@ -33,6 +33,7 @@ export default function FileSelection() {
             const heapInfo = fileContentParser(e.target.result);
             setFileHeapInfo(heapInfo);
             setDisplayFileName(file.name);
+            setFileExe(heapInfo.exename);
             console.log(heapInfo.exename);
         };
 
@@ -48,6 +49,7 @@ export default function FileSelection() {
         // console.log(selectedFile);
         // console.log(allFiles[selectedFile]);
         const heapInfo = fileContentParser(allFiles[selectedFile]);
+        setFileExe(heapInfo.exename);
         console.log(heapInfo.exename);
 
         setFileHeapInfo(heapInfo);
@@ -63,7 +65,8 @@ export default function FileSelection() {
                 
                 <Grid item xs={1}>
                     <Typography variant="h4" gutterBottom>
-                        {displayFileName ? displayFileName : "Select a file to view"}
+                        {displayFileName ? displayFileName : "Select a file to view"}<br/>
+                        {fileExe}
                     </Typography>
                 </Grid>
                 <Grid item xs={1}>
