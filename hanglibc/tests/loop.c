@@ -21,20 +21,20 @@ int main() {
 
 
         void* ptrs[max_tcache_entries + 1];
-        void* ptrs2[max_tcache_entries + 1];
+        // void* ptrs2[max_tcache_entries + 1];
 
         for (int i = 0; i < max_tcache_entries + 1; i++) {
             ptrs[i] = malloc(alloc_size);
         }
 
-        for (int i = 0; i < max_tcache_entries + 1; i++) {
-            ptrs2[i] = malloc(randtime);
-        }
+        // for (int i = 0; i < max_tcache_entries + 1; i++) {
+        //     ptrs2[i] = malloc(randtime);
+        // }
 
 
         for (int i = 0; i < max_tcache_entries + 1; i++) {
             free(ptrs[i]);
-            free(ptrs2[i]);
+            // free(ptrs2[i]);
         }
         count++;
         sleep(5);

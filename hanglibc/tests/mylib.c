@@ -8,6 +8,8 @@
 #include <sys/ptrace.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <sys/types.h>
+#include <string.h>
 // #include <malloc.h>
 #include "/home/uprhan/hanglibc/glibc/malloc/malloc.h"
 
@@ -28,24 +30,36 @@ void signal_handler(int signum) {
         if (len != -1) {
             program_path[len] = '\0'; // terminate the string
             
-            // get program name
-            char* exe_name = basename(program_path);
-            char* dir_path = dirname(program_path);
-
             // Create timestamp
             time_t now = time(NULL);
             struct tm *local = localtime(&now);
-            char time_str[20];
-            strftime(time_str, sizeof(time_str), "%Y-%m-%d %H:%M:%S", local);
+            char time_str[25];
             
-            // snprintf(outfile_path, sizeof(outfile_path), "%s_info.txt", dir_path, exe_name);
-            snprintf(outfile_path, sizeof(outfile_path), "/home/uprhan/hanglibc/tests/test_info.txt");
+            
+            // get program name
+            char* exe_name = basename(program_path);
+
+            // get program heap info location
+            char file_path[100] = "/home/uprhan/heapInfo/";
+            strcat(file_path, exe_name);
+            
+            // Check directory exist, create if not
+            struct stat st = {0};
+            if (stat(file_path, &st) == -1) {
+                if (mkdir(file_path, 0700) == -1) {
+                    perror("Error creating directory\n");
+                }
+            }
+            // parent path is now the folder to save all heap info for this executable
 
 
+            strftime(time_str, sizeof(time_str), "/%Y_%m_%d_%H_%M_%S.txt", local);
+            strcat(file_path, time_str);
 
             // write file
-            outfile = fopen(outfile_path, "a");
-            fprintf(outfile, "%s\n", time_str);
+            outfile = fopen(file_path, "ab+");
+            // TODO: file open failed
+            fprintf(outfile, "%s\n", exe_name);
             get_info(outfile);
             fputc('\n', outfile);
             fflush(outfile);
@@ -65,13 +79,6 @@ __attribute__((constructor))
 void setup_signal_handler(void) {
     count = 0;
     signal(SIGHEAP, signal_handler);
-    time_t now = time(NULL);
-    struct tm *local = localtime(&now);
-    char time_str[20];
-    strftime(time_str, sizeof(time_str), "%Y-%m-%d", local);
-    fprintf(stdout, "%s\n", time_str);
-    strftime(time_str, sizeof(time_str), "%Y-%m-%d %H:%M:%S", local);
-    fprintf(stdout, "%s\n", time_str);
 }
 
 
@@ -81,10 +88,10 @@ void libclosed(void) {
     struct tm *local = localtime(&now);
     char time_str[20];
     strftime(time_str, sizeof(time_str), "%Y-%m-%d %H:%M:%S", local);
-    outfile = fopen("/home/uprhan/hanglibc/tests/test_info.txt", "a");
-    if (outfile) {
-        fprintf(outfile, "lib end at %s with process:%d.\n", time_str, getpid());
-        fflush(outfile);
-        fclose(outfile);
-    }
+    // outfile = fopen("/home/uprhan/hanglibc/tests/test_info.txt", "a");
+    // if (outfile) {
+    //     fprintf(outfile, "lib end at %s with process:%d.\n", time_str, getpid());
+    //     fflush(outfile);
+    //     fclose(outfile);
+    // }
 }
